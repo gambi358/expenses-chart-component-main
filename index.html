@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+   <script src="data.json"></script>
+  <title>Expenses chart component</title>
+
+
+</head>
+<body>
+
+  <main>
+
+    <div class="container">
+    
+    <div class="header"> 
+      <div class="balance">My balance
+      <h1>$921.48</h1>
+      </div>
+    <img src="./images/logo.svg" alt="">
+    </div>
+    
+    <div class="main">
+
+     <h1>Spending - Last 7 days</h1>
+
+
+     <div class="charts">
+    
+
+
+     </div>
+
+     <div class="summary">
+       <div class="total"> 
+       <p> Total this month</p>
+      <h2>$478.33</h2>
+    </div>
+      
+       <div class="lastmonth">  
+        <p>+2.4%</p>
+        <p>from last month</p>
+      </div>
+
+     </div>
+
+
+
+
+</div>
+
+    </div>
+
+
+
+  </main>
+
+<script>
+
+const charts =document.querySelector(".charts");
+var html = "";
+var  max = 0;
+
+data.forEach(function(element, index){
+    if(element.amount>data[max].amount)
+    max=index
+})
+
+
+function height(amount){
+    return(amount*150)/data[max].amount
+}
+
+data.forEach(function(el,index){
+
+
+    html+='<div class="column">'
+    html+='<div class="col">'
+    html+='<span class="title">$'+el.amount+'</span>'
+
+    html+='<span class="chart '
+
+    if(index==max)
+    html+="highest"
+
+    html+='"style = "height:'+height(el.amount)+'px"></span>'
+
+
+    html+='</div>'
+
+    html+='<span class="day">'+el.day+'</span>'
+
+    html+='</div>'
+ 
+
+})
+
+
+charts.innerHTML= html;
+
+
+</script>
+  
+
+</body>
+</html>
